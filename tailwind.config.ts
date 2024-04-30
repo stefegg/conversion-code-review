@@ -11,10 +11,8 @@ const config: Config = {
       colors: {
         border: "#3700b3",
         text: "#BB86FC",
-        containerBg: "#000000",
-        containerHover: "#3700b3",
         bodyBg: "#121212",
-        secondary: "#03DAc6",
+        secondary: "#03c51d",
         error: "#cf6679",
         link: "#0070E0",
       },
