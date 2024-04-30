@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { convertOptions } from "@/app/_constants";
 import { validationSchema } from "./validation";
 import {
-  kelvinToCelc,
+  kelvinToCels,
   roundToTenths,
   kelvinToFaren,
   kelvinToRankine,
