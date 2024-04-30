@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #3700b3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bb86fc;
+  border-radius: 8px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

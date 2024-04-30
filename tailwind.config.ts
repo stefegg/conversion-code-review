@@ -8,13 +8,25 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        border: "#3700b3",
+        text: "#BB86FC",
+        containerBg: "#000000",
+        containerHover: "#3700b3",
+        bodyBg: "#121212",
+        secondary: "#03DAc6",
+        error: "#cf6679",
+        link: "#0070E0",
       },
     },
   },
   plugins: [],
+  safelist: [
+    {
+      pattern:
+        /(bg|text|border)-(border|text|containerBg|bodyBg|containerHover|error|link|secondary)/,
+      variants: ["before", "hover", "focus"],
+    },
+  ],
 };
 export default config;
