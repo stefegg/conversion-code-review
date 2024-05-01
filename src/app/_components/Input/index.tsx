@@ -1,36 +1,25 @@
 import { ChangeEvent } from "react";
 
 type InputProps = {
-  label?: string;
+  label: string;
   error?: string | false;
   width: string;
   placeholder?: string;
   onChange: (e: string | ChangeEvent<any>) => void;
   onBlur: (e: any) => void;
-  value: string;
+  value: number;
   type?: string;
-  name?: string;
 };
 
 const Input = (props: InputProps) => {
-  const {
-    label,
-    error,
-    width,
-    placeholder,
-    value,
-    onChange,
-    onBlur,
-    type,
-    name,
-  } = props;
+  const { label, error, width, placeholder, value, onChange, onBlur, type } =
+    props;
   return (
     <div className={`flex flex-col w-${width} rounded-sm bg-blue-500`}>
       <span className="text-base mb-1 h-6">{label && label}</span>
       <div>
         <div className={`flex rounded w-full}`}>
           <input
-            name={name}
             value={value}
             onChange={onChange}
             onBlur={onBlur}

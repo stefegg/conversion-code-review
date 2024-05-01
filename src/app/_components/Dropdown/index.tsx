@@ -60,7 +60,7 @@ const Dropdown = (props: DropdownProps) => {
       </div>
       {isOpen && (
         <div
-          className={`w-36 z-40 rounded-lg absolute h-auto max-h-32 overflow-auto border-2 bg-containerBg border-border
+          className={`w-36 z-40 rounded-lg absolute h-auto max-h-32 overflow-auto border-2 bg-bodyBg border-border
              top-16
           `}
           onMouseLeave={() => mouseOut()}
@@ -69,7 +69,7 @@ const Dropdown = (props: DropdownProps) => {
             <div
               key={idx}
               onClick={() => clickItem(o.setter)}
-              className={`flex flex-row p-2 items-center text-text hover:bg-containerHover rounded-lg cursor-pointer`}
+              className={`flex flex-row p-2 items-center text-text hover:bg-border rounded-lg cursor-pointer`}
             >
               {o.title}
             </div>

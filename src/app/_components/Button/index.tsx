@@ -11,10 +11,10 @@ const Button = (props: ButtonProps) => {
   const { buttonText, onClick, styleType, type } = props;
   const getStyle = () => {
     if (styleType === "primary") {
-      return `bg-containerBg border-border text-text hover:bg-bodyBg hover:border-secondary`;
+      return `text-text bg-bodyBg border-border hover:text-bodyBg hover:bg-text hover:border-secondary`;
     }
     if (styleType === "secondary") {
-      return `bg-text border-border text-bodyBg hover:bg-border hover:text-text hover:border-text`;
+      return `text-bodyBg bg-text border-border hover:text-text hover:bg-border hover:border-text`;
     }
   };
   return (
