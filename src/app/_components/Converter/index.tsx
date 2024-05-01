@@ -4,7 +4,13 @@ import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { convertOptions } from "@/app/_constants";
 import { validationSchema } from "./validation";
-import { roundToTenths, temperatureConversion } from "@/app/_utils";
+import {
+  roundToTenths,
+  temperatureConversion,
+  volumeConversion,
+  VolumeTypes,
+  TempTypes,
+} from "@/app/_utils";
 
 type ConvertOption = {
   name: string;
@@ -34,15 +40,23 @@ const Converter = () => {
       const inputTenths = roundToTenths(formik.values.inputNum);
       const studentTenths = roundToTenths(formik.values.studentInput);
       const answer = temperatureConversion(
-        formik.values.inputUnit,
-        formik.values.targetUnit,
+        formik.values.inputUnit as TempTypes,
+        formik.values.targetUnit as TempTypes,
+        inputTenths,
+        studentTenths
+      );
+      setResult(answer);
+    } else if (inputUnit.type === "Volume" && targetUnit.type === "Volume") {
+      const inputTenths = roundToTenths(formik.values.inputNum);
+      const studentTenths = roundToTenths(formik.values.studentInput);
+      const answer = volumeConversion(
+        formik.values.inputUnit as VolumeTypes,
+        formik.values.targetUnit as VolumeTypes,
         inputTenths,
         studentTenths
       );
       setResult(answer);
     }
-
-    // }
   };
 
   const formik = useFormik({

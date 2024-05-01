@@ -30,7 +30,7 @@ const Dropdown = (props: DropdownProps) => {
   };
 
   return (
-    <div className="relative bg-yellow-500">
+    <div className="relative">
       <span className="mb-1 text-base h-6 flex">{title}</span>
 
       <div className="flex flex-row">
