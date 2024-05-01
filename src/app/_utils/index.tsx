@@ -4,10 +4,41 @@ export const roundToTenths = (x: number) => {
   return Math.round(x * 10) / 10;
 };
 
-export const checkAnswer = (roundConvert: number, studentAnswer: number) => {
+const checkAnswer = (roundConvert: number, studentAnswer: number) => {
   if (roundConvert !== studentAnswer) {
     return "incorrect";
   } else return "correct";
+};
+
+const subtractAmount = (input: number, amount: number) => {
+  return input - amount;
+};
+
+const addAmount = (input: number, amount: number) => {
+  return input + amount;
+};
+
+const multiplyAmount = (input: number, amount: number) => {
+  return input * amount;
+};
+
+const divideAmount = (input: number, amount: number) => {
+  return input / amount;
+};
+
+const oneToOne = (input: number, studentAnswer: number) => {
+  return checkAnswer(input, studentAnswer);
+};
+
+const findAnswer = (
+  input: number,
+  studentAnswer: number,
+  amount: number,
+  operation: (a: number, b: number) => number
+) => {
+  const convert = operation(input, amount);
+  const roundConvert = roundToTenths(convert);
+  return checkAnswer(roundConvert, studentAnswer);
 };
 
 export type VolumeTypes =
@@ -66,50 +97,34 @@ export const volumeConversion = (
 
 // Kelvin
 
-export const kelvinConversion = (
+const kelvinConversion = (
   type: TempTypes,
   kInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "Celsius":
-      return kelvinToCels(kInput, studentAnswer);
+      return findAnswer(kInput, studentAnswer, 237.15, subtractAmount);
     case "Fahrenheit":
       return kelvinToFahren(kInput, studentAnswer);
     case "Rankine":
-      return kelvinToRankine(kInput, studentAnswer);
+      return findAnswer(kInput, studentAnswer, 1.8, multiplyAmount);
     case "Kelvin":
-      return kelvinToKelvin(kInput, studentAnswer);
+      return oneToOne(kInput, studentAnswer);
     default:
       return "invalid";
   }
 };
 
-export const kelvinToCels = (kInput: number, studentAnswer: number) => {
-  const convertK = kInput - 273.15;
-  const roundConvert = roundToTenths(convertK);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const kelvinToFahren = (kInput: number, studentAnswer: number) => {
+const kelvinToFahren = (kInput: number, studentAnswer: number) => {
   const convertK = (kInput - 273.15) * 1.8 + 32;
   const roundConvert = roundToTenths(convertK);
   return checkAnswer(roundConvert, studentAnswer);
 };
 
-export const kelvinToRankine = (kInput: number, studentAnswer: number) => {
-  const convertK = kInput * 1.8;
-  const roundConvert = roundToTenths(convertK);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const kelvinToKelvin = (kInput: number, studentAnswer: number) => {
-  return checkAnswer(kInput, studentAnswer);
-};
-
 //Fahrenheit
 
-export const fahrenheitConversion = (
+const fahrenheitConversion = (
   type: TempTypes,
   fInput: number,
   studentAnswer: number
@@ -120,34 +135,24 @@ export const fahrenheitConversion = (
     case "Kelvin":
       return fahrenToKelvin(fInput, studentAnswer);
     case "Rankine":
-      return fahrenToRankin(fInput, studentAnswer);
+      return findAnswer(fInput, studentAnswer, 459.67, addAmount);
     case "Fahrenheit":
-      return fahrenToFahren(fInput, studentAnswer);
+      return oneToOne(fInput, studentAnswer);
     default:
       return "invalid";
   }
 };
 
-export const fahrenToKelvin = (fInput: number, studentAnswer: number) => {
+const fahrenToKelvin = (fInput: number, studentAnswer: number) => {
   const convertF = (fInput - 32) * (5 / 9) + 273.15;
   const roundConvert = roundToTenths(convertF);
   return checkAnswer(roundConvert, studentAnswer);
 };
 
-export const fahrenToRankin = (fInput: number, studentAnswer: number) => {
-  const convertF = fInput + 459.67;
-  const roundConvert = roundToTenths(convertF);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const fahrenToCels = (fInput: number, studentAnswer: number) => {
+const fahrenToCels = (fInput: number, studentAnswer: number) => {
   const convertF = (fInput - 32) * (5 / 9);
   const roundConvert = roundToTenths(convertF);
   return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const fahrenToFahren = (fInput: number, studentAnswer: number) => {
-  return checkAnswer(fInput, studentAnswer);
 };
 
 //Rankine
@@ -163,39 +168,29 @@ export const rankineConversion = (
     case "Kelvin":
       return rankineToKelvin(rInput, studentAnswer);
     case "Fahrenheit":
-      return rankineToFahren(rInput, studentAnswer);
+      return findAnswer(rInput, studentAnswer, 459.67, subtractAmount);
     case "Rankine":
-      return rankineToRankine(rInput, studentAnswer);
+      return oneToOne(rInput, studentAnswer);
     default:
       return "invalid";
   }
 };
 
-export const rankineToKelvin = (rInput: number, studentAnswer: number) => {
+const rankineToKelvin = (rInput: number, studentAnswer: number) => {
   const convertR = rInput * (5 / 9);
   const roundConvert = roundToTenths(convertR);
   return checkAnswer(roundConvert, studentAnswer);
 };
 
-export const rankineToFahren = (rInput: number, studentAnswer: number) => {
-  const convertR = rInput - 459.67;
-  const roundConvert = roundToTenths(convertR);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const rankineToCels = (rInput: number, studentAnswer: number) => {
+const rankineToCels = (rInput: number, studentAnswer: number) => {
   const convertR = (rInput - 491.67) * (5 / 9);
   const roundConvert = roundToTenths(convertR);
   return checkAnswer(roundConvert, studentAnswer);
 };
 
-export const rankineToRankine = (rInput: number, studentAnswer: number) => {
-  return checkAnswer(rInput, studentAnswer);
-};
-
 // Celsius
 
-export const celsiusConversion = (
+const celsiusConversion = (
   type: TempTypes,
   cInput: number,
   studentAnswer: number
@@ -204,388 +199,174 @@ export const celsiusConversion = (
     case "Rankine":
       return celsiusToRankine(cInput, studentAnswer);
     case "Kelvin":
-      return celsiusToKelvin(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 273.15, addAmount);
     case "Fahrenheit":
       return celsiusToFaren(cInput, studentAnswer);
     case "Celsius":
-      return celsiusToCelsius(cInput, studentAnswer);
+      return oneToOne(cInput, studentAnswer);
     default:
       return "invalid";
   }
 };
 
-export const celsiusToKelvin = (cInput: number, studentAnswer: number) => {
-  const convertC = cInput + 273.15;
-  const roundConvert = roundToTenths(convertC);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const celsiusToFaren = (cInput: number, studentAnswer: number) => {
+const celsiusToFaren = (cInput: number, studentAnswer: number) => {
   const convertC = cInput * 1.8 + 32;
   const roundConvert = roundToTenths(convertC);
   return checkAnswer(roundConvert, studentAnswer);
 };
 
-export const celsiusToRankine = (cInput: number, studentAnswer: number) => {
+const celsiusToRankine = (cInput: number, studentAnswer: number) => {
   const convertC = cInput * 1.8 + 491.67;
   const roundConvert = roundToTenths(convertC);
   return checkAnswer(roundConvert, studentAnswer);
 };
 
-export const celsiusToCelsius = (cInput: number, studentAnswer: number) => {
-  return checkAnswer(cInput, studentAnswer);
-};
-
 // Liters
 
-export const literConversion = (
+const literConversion = (
   type: VolumeTypes,
   lInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return litersToLiters(lInput, studentAnswer);
+      return oneToOne(lInput, studentAnswer);
     case "tablespoons":
-      return litersToTable(lInput, studentAnswer);
+      return findAnswer(lInput, studentAnswer, 67.628, multiplyAmount);
     case "cubic-inches":
-      return litersToCinches(lInput, studentAnswer);
+      return findAnswer(lInput, studentAnswer, 61.024, multiplyAmount);
     case "cups":
-      return litersToCups(lInput, studentAnswer);
+      return findAnswer(lInput, studentAnswer, 4.227, multiplyAmount);
     case "cubic-feet":
-      return litersToCfeet(lInput, studentAnswer);
+      return findAnswer(lInput, studentAnswer, 28.317, divideAmount);
     case "gallons":
-      return litersToGallons(lInput, studentAnswer);
+      return findAnswer(lInput, studentAnswer, 3.785, divideAmount);
     default:
       return "invalid";
   }
 };
 
-export const litersToTable = (lInput: number, studentAnswer: number) => {
-  const convertL = lInput * 67.628;
-  const roundConvert = roundToTenths(convertL);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const litersToCinches = (lInput: number, studentAnswer: number) => {
-  const convertL = lInput * 61.024;
-  const roundConvert = roundToTenths(convertL);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const litersToCups = (lInput: number, studentAnswer: number) => {
-  const convertL = lInput * 4.227;
-  const roundConvert = roundToTenths(convertL);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const litersToCfeet = (lInput: number, studentAnswer: number) => {
-  const convertL = lInput / 28.317;
-  const roundConvert = roundToTenths(convertL);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const litersToGallons = (lInput: number, studentAnswer: number) => {
-  const convertL = lInput / 3.785;
-  const roundConvert = roundToTenths(convertL);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const litersToLiters = (lInput: number, studentAnswer: number) => {
-  return checkAnswer(lInput, studentAnswer);
-};
-
 // Tablespoons
 
-export const tableSpoonConversion = (
+const tableSpoonConversion = (
   type: VolumeTypes,
   tInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return tspoonsToLiters(tInput, studentAnswer);
+      return findAnswer(tInput, studentAnswer, 67.628, divideAmount);
     case "tablespoons":
-      return tspoonsToTspoons(tInput, studentAnswer);
+      return oneToOne(tInput, studentAnswer);
     case "cubic-inches":
-      return tspoonsToCinches(tInput, studentAnswer);
+      return findAnswer(tInput, studentAnswer, 1.108, divideAmount);
     case "cups":
-      return tspoonsToCups(tInput, studentAnswer);
+      return findAnswer(tInput, studentAnswer, 16, divideAmount);
     case "cubic-feet":
-      return tspoonsToCfeet(tInput, studentAnswer);
+      return findAnswer(tInput, studentAnswer, 1915, divideAmount);
     case "gallons":
-      return tspoonsToGallons(tInput, studentAnswer);
+      return findAnswer(tInput, studentAnswer, 256, divideAmount);
     default:
       return "invalid";
   }
-};
-
-export const tspoonsToLiters = (tInput: number, studentAnswer: number) => {
-  const convertT = tInput / 67.628;
-  const roundConvert = roundToTenths(convertT);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const tspoonsToTspoons = (tInput: number, studentAnswer: number) => {
-  return checkAnswer(tInput, studentAnswer);
-};
-
-export const tspoonsToCinches = (tInput: number, studentAnswer: number) => {
-  const convertT = tInput / 1.108;
-  const roundConvert = roundToTenths(convertT);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const tspoonsToCups = (tInput: number, studentAnswer: number) => {
-  const convertT = tInput / 16;
-  const roundConvert = roundToTenths(convertT);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const tspoonsToCfeet = (tInput: number, studentAnswer: number) => {
-  const convertT = tInput / 1915;
-  const roundConvert = roundToTenths(convertT);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const tspoonsToGallons = (tInput: number, studentAnswer: number) => {
-  const convertT = tInput / 256;
-  const roundConvert = roundToTenths(convertT);
-  return checkAnswer(roundConvert, studentAnswer);
 };
 
 // Cubic-inches
 
-export const cubicInchesConversion = (
+const cubicInchesConversion = (
   type: VolumeTypes,
   cInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return cInchesToLiters(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 61.024, divideAmount);
     case "tablespoons":
-      return cInchesToTable(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 1.108, multiplyAmount);
     case "cubic-inches":
-      return cInchesToCInches(cInput, studentAnswer);
+      return oneToOne(cInput, studentAnswer);
     case "cups":
-      return cInchesToCups(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 14.438, divideAmount);
     case "cubic-feet":
-      return cInchesTocFeet(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 1728, divideAmount);
     case "gallons":
-      return cInchesToGallons(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 231, divideAmount);
     default:
       return "invalid";
   }
-};
-
-export const cInchesToLiters = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 61.024;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cInchesToTable = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 1.108;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cInchesToCInches = (cInput: number, studentAnswer: number) => {
-  return checkAnswer(cInput, studentAnswer);
-};
-
-export const cInchesToCups = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 14.438;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cInchesTocFeet = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 1728;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cInchesToGallons = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 231;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
 };
 
 // Cups
 
-export const cupsConversion = (
+const cupsConversion = (
   type: VolumeTypes,
   cInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return cupsToLiters(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 4.227, divideAmount);
     case "tablespoons":
-      return cupsToTablespoons(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 16, multiplyAmount);
     case "cubic-inches":
-      return cupsTocInches(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 14.438, multiplyAmount);
     case "cups":
-      return cupsToCups(cInput, studentAnswer);
+      return oneToOne(cInput, studentAnswer);
     case "cubic-feet":
-      return cupsTocFeet(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 119.7, divideAmount);
     case "gallons":
-      return cupsToGallons(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 16, divideAmount);
     default:
       return "invalid";
   }
-};
-
-export const cupsToLiters = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 4.227;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cupsToTablespoons = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 16;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cupsTocInches = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 14.438;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cupsToCups = (cInput: number, studentAnswer: number) => {
-  return checkAnswer(cInput, studentAnswer);
-};
-
-export const cupsTocFeet = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 119.7;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cupsToGallons = (cInput: number, studentAnswer: number) => {
-  const convert = cInput / 16;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
 };
 
 // Cubic-feet
 
-export const cubicFeetConversion = (
+const cubicFeetConversion = (
   type: VolumeTypes,
   cInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return cFeetToLiters(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 28.317, multiplyAmount);
     case "tablespoons":
-      return cFeetToTablespoon(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 1915, multiplyAmount);
     case "cubic-inches":
-      return cFeetTocInches(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 1728, multiplyAmount);
     case "cups":
-      return cFeetToCups(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 119.7, multiplyAmount);
     case "cubic-feet":
-      return cFeetTocFeet(cInput, studentAnswer);
+      return oneToOne(cInput, studentAnswer);
     case "gallons":
-      return cFeetToGallons(cInput, studentAnswer);
+      return findAnswer(cInput, studentAnswer, 7.481, multiplyAmount);
     default:
       return "invalid";
   }
 };
 
-export const cFeetToLiters = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 28.317;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cFeetToTablespoon = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 1915;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cFeetTocInches = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 1728;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cFeetToCups = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 119.7;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const cFeetTocFeet = (cInput: number, studentAnswer: number) => {
-  return checkAnswer(cInput, studentAnswer);
-};
-
-export const cFeetToGallons = (cInput: number, studentAnswer: number) => {
-  const convert = cInput * 7.481;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
 // Gallons
 
-export const gallonConversion = (
+const gallonConversion = (
   type: VolumeTypes,
   gInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return gallonsToLiters(gInput, studentAnswer);
+      return findAnswer(gInput, studentAnswer, 3.785, multiplyAmount);
     case "tablespoons":
-      return gallonsToTablespoons(gInput, studentAnswer);
+      return findAnswer(gInput, studentAnswer, 256, multiplyAmount);
     case "cubic-inches":
-      return gallonsTocInches(gInput, studentAnswer);
+      return findAnswer(gInput, studentAnswer, 231, multiplyAmount);
     case "cups":
-      return gallonsToCups(gInput, studentAnswer);
+      return findAnswer(gInput, studentAnswer, 16, multiplyAmount);
     case "cubic-feet":
-      return gallonsTocFeet(gInput, studentAnswer);
+      return findAnswer(gInput, studentAnswer, 7.48, divideAmount);
     case "gallons":
-      return gallonsToGallons(gInput, studentAnswer);
+      return oneToOne(gInput, studentAnswer);
     default:
       return "invalid";
   }
-};
-
-export const gallonsToLiters = (gInput: number, studentAnswer: number) => {
-  const convert = gInput * 3.785;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const gallonsToTablespoons = (gInput: number, studentAnswer: number) => {
-  const convert = gInput * 256;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const gallonsTocInches = (gInput: number, studentAnswer: number) => {
-  const convert = gInput * 231;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const gallonsToCups = (gInput: number, studentAnswer: number) => {
-  const convert = gInput * 16;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const gallonsTocFeet = (gInput: number, studentAnswer: number) => {
-  const convert = gInput / 7.48;
-  const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
-};
-
-export const gallonsToGallons = (cInput: number, studentAnswer: number) => {
-  return checkAnswer(cInput, studentAnswer);
 };
