@@ -15,7 +15,7 @@ const Input = (props: InputProps) => {
   const { label, error, width, placeholder, value, onChange, onBlur, type } =
     props;
   return (
-    <div className={`flex flex-col w-${width} rounded-sm bg-blue-500`}>
+    <div className={`flex flex-col w-${width} rounded-sm`}>
       <span className="text-base mb-1 h-6">{label && label}</span>
       <div>
         <div className={`flex rounded w-full}`}>
