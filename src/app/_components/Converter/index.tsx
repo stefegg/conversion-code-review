@@ -4,32 +4,45 @@ import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { convertOptions } from "@/app/_constants";
 import { validationSchema } from "./validation";
-import {
-  kelvinToCels,
-  roundToTenths,
-  kelvinToFaren,
-  kelvinToRankine,
-} from "@/app/_utils";
+import { roundToTenths, temperatureConversion } from "@/app/_utils";
+
+type ConvertOption = {
+  name: string;
+  type: string;
+};
 
 const Converter = () => {
-  const [inputUnit, setInputUnit] = useState<object>({});
-  const [targetUnit, setTargetUnit] = useState<object>({});
+  const [inputUnit, setInputUnit] = useState<ConvertOption>({
+    name: "",
+    type: "",
+  });
+  const [targetUnit, setTargetUnit] = useState<ConvertOption>({
+    name: "",
+    type: "",
+  });
   const [result, setResult] = useState<string>("");
 
   const invalidConversion = () => {
     setResult("invalid");
-    formik.setFieldError("targetUnit", "Invalid conversion unit");
+    formik.setFieldError("targetUnit", "Invalid target unit");
   };
 
   const handleSubmit = () => {
-    if ("type" in inputUnit && "type" in targetUnit) {
-      inputUnit.type !== targetUnit.type ? invalidConversion() : null;
+    if (inputUnit.type !== targetUnit.type) {
+      return invalidConversion();
+    } else if (inputUnit.type === "Temp" && targetUnit.type === "Temp") {
+      const inputTenths = roundToTenths(formik.values.inputNum);
+      const studentTenths = roundToTenths(formik.values.studentInput);
+      const answer = temperatureConversion(
+        formik.values.inputUnit,
+        formik.values.targetUnit,
+        inputTenths,
+        studentTenths
+      );
+      setResult(answer);
     }
-    const test = kelvinToRankine(
-      roundToTenths(formik.values.inputNum),
-      roundToTenths(formik.values.studentInput)
-    );
-    console.log(test, "------");
+
+    // }
   };
 
   const formik = useFormik({

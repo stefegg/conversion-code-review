@@ -16,17 +16,17 @@ export const temperatureConversion = (
   tempInput: number,
   studentAnswer: number
 ) => {
-  if (inputType === "Kelvin") {
-    return kelvinConversion(targetType, tempInput, studentAnswer);
-  }
-  if (inputType === "Fahrenheit") {
-    return fahrenheitConversion(targetType, tempInput, studentAnswer);
-  }
-  if (inputType === "Rankine") {
-    return rankineConversion(targetType, tempInput, studentAnswer);
-  }
-  if (inputType === "Celsius") {
-    return celsiusConversion(targetType, tempInput, studentAnswer);
+  switch (inputType) {
+    case "Kelvin":
+      return kelvinConversion(targetType, tempInput, studentAnswer);
+    case "Fahrenheit":
+      return fahrenheitConversion(targetType, tempInput, studentAnswer);
+    case "Rankine":
+      return rankineConversion(targetType, tempInput, studentAnswer);
+    case "Celsius":
+      return celsiusConversion(targetType, tempInput, studentAnswer);
+    default:
+      return "invalid";
   }
 };
 
@@ -37,14 +37,15 @@ export const kelvinConversion = (
   kInput: number,
   studentAnswer: number
 ) => {
-  if (type === "Celsius") {
-    return kelvinToCels(kInput, studentAnswer);
-  }
-  if (type === "Fahrenheit") {
-    return kelvinToFaren(kInput, studentAnswer);
-  }
-  if (type === "Rankine") {
-    return kelvinToRankine(kInput, studentAnswer);
+  switch (type) {
+    case "Celsius":
+      return kelvinToCels(kInput, studentAnswer);
+    case "Fahrenheit":
+      return kelvinToFaren(kInput, studentAnswer);
+    case "Rankine":
+      return kelvinToRankine(kInput, studentAnswer);
+    default:
+      return "invalid";
   }
 };
 
@@ -73,14 +74,15 @@ export const fahrenheitConversion = (
   fInput: number,
   studentAnswer: number
 ) => {
-  if (type === "Celsius") {
-    return farenToCels(fInput, studentAnswer);
-  }
-  if (type === "Kelvin") {
-    return farenToKelvin(fInput, studentAnswer);
-  }
-  if (type === "Rankine") {
-    return farenToRankin(fInput, studentAnswer);
+  switch (type) {
+    case "Celsius":
+      return farenToCels(fInput, studentAnswer);
+    case "Kelvin":
+      return farenToKelvin(fInput, studentAnswer);
+    case "Rankine":
+      return farenToRankin(fInput, studentAnswer);
+    default:
+      return "invalid";
   }
 };
 
@@ -109,14 +111,15 @@ export const rankineConversion = (
   rInput: number,
   studentAnswer: number
 ) => {
-  if (type === "Celsius") {
-    return rankineToCels(rInput, studentAnswer);
-  }
-  if (type === "Kelvin") {
-    return rankineToKelvin(rInput, studentAnswer);
-  }
-  if (type === "Fahrenheit") {
-    return rankineToFaren(rInput, studentAnswer);
+  switch (type) {
+    case "Celsius":
+      return rankineToCels(rInput, studentAnswer);
+    case "Kelvin":
+      return rankineToKelvin(rInput, studentAnswer);
+    case "Fahrenheit":
+      return rankineToFaren(rInput, studentAnswer);
+    default:
+      return "invalid";
   }
 };
 
@@ -145,14 +148,15 @@ export const celsiusConversion = (
   cInput: number,
   studentAnswer: number
 ) => {
-  if (type === "Rankine") {
-    return celsiusToRankine(cInput, studentAnswer);
-  }
-  if (type === "Kelvin") {
-    return celsiusToKelvin(cInput, studentAnswer);
-  }
-  if (type === "Fahrenheit") {
-    return celsiusToFaren(cInput, studentAnswer);
+  switch (type) {
+    case "Rankine":
+      return celsiusToRankine(cInput, studentAnswer);
+    case "Kelvin":
+      return celsiusToKelvin(cInput, studentAnswer);
+    case "Fahrenheit":
+      return celsiusToFaren(cInput, studentAnswer);
+    default:
+      return "invalid";
   }
 };
 
@@ -173,3 +177,15 @@ export const celsiusToRankine = (cInput: number, studentAnswer: number) => {
   const roundConvert = roundToTenths(convertC);
   return checkAnswer(roundConvert, studentAnswer);
 };
+
+// Liters
+
+// Tablespoons
+
+// Cubic-inches
+
+// Cups
+
+// Cubic-feet
+
+// Gallons
