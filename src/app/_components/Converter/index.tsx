@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { convertOptions } from "@/app/_constants";
 import { validationSchema } from "./validation";
 import {
-  roundToTenths,
   temperatureConversion,
   volumeConversion,
   VolumeTypes,
@@ -37,23 +36,19 @@ const Converter = () => {
     if (inputUnit.type !== targetUnit.type) {
       return invalidConversion();
     } else if (inputUnit.type === "Temp" && targetUnit.type === "Temp") {
-      const inputTenths = roundToTenths(formik.values.inputNum);
-      const studentTenths = roundToTenths(formik.values.studentInput);
       const answer = temperatureConversion(
         formik.values.inputUnit as TempTypes,
         formik.values.targetUnit as TempTypes,
-        inputTenths,
-        studentTenths
+        formik.values.inputNum,
+        formik.values.studentInput
       );
       setResult(answer);
     } else if (inputUnit.type === "Volume" && targetUnit.type === "Volume") {
-      const inputTenths = roundToTenths(formik.values.inputNum);
-      const studentTenths = roundToTenths(formik.values.studentInput);
       const answer = volumeConversion(
         formik.values.inputUnit as VolumeTypes,
         formik.values.targetUnit as VolumeTypes,
-        inputTenths,
-        studentTenths
+        formik.values.inputNum,
+        formik.values.studentInput
       );
       setResult(answer);
     }
@@ -90,6 +85,7 @@ const Converter = () => {
         onBlur={formik.handleBlur("inputNum")}
         width="1/2"
         label="Input Numerical Value"
+        type="number"
         error={formik.touched.inputNum && formik.errors.inputNum}
       />
       <Dropdown
@@ -122,6 +118,7 @@ const Converter = () => {
         onBlur={formik.handleBlur("studentInput")}
         width="1/2"
         label="Student Response"
+        type="number"
         error={formik.touched.studentInput && formik.errors.studentInput}
       />
       <div className="flex flex-col gap-2">

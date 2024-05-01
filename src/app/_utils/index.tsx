@@ -1,13 +1,7 @@
 //General Utils
 
-export const roundToTenths = (x: number) => {
+const roundToTenths = (x: number) => {
   return Math.round(x * 10) / 10;
-};
-
-const checkAnswer = (roundConvert: number, studentAnswer: number) => {
-  if (roundConvert !== studentAnswer) {
-    return "incorrect";
-  } else return "correct";
 };
 
 const subtractAmount = (input: number, amount: number) => {
@@ -27,7 +21,11 @@ const divideAmount = (input: number, amount: number) => {
 };
 
 const oneToOne = (input: number, studentAnswer: number) => {
-  return checkAnswer(input, studentAnswer);
+  const roundStudentAnswer = (studentAnswer * 10) / 10;
+  return checkAnswer(
+    parseFloat(input.toFixed(1)),
+    parseFloat(roundStudentAnswer.toFixed(1))
+  );
 };
 
 const findAnswer = (
@@ -38,7 +36,14 @@ const findAnswer = (
 ) => {
   const convert = operation(input, amount);
   const roundConvert = roundToTenths(convert);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundStudentAnswer);
+};
+
+const checkAnswer = (roundConvert: number, studentAnswer: number) => {
+  if (roundConvert !== studentAnswer) {
+    return "incorrect";
+  } else return "correct";
 };
 
 export type VolumeTypes =
@@ -104,7 +109,7 @@ const kelvinConversion = (
 ) => {
   switch (type) {
     case "Celsius":
-      return findAnswer(kInput, studentAnswer, 237.15, subtractAmount);
+      return findAnswer(kInput, studentAnswer, 273.15, subtractAmount);
     case "Fahrenheit":
       return kelvinToFahren(kInput, studentAnswer);
     case "Rankine":
@@ -119,7 +124,8 @@ const kelvinConversion = (
 const kelvinToFahren = (kInput: number, studentAnswer: number) => {
   const convertK = (kInput - 273.15) * 1.8 + 32;
   const roundConvert = roundToTenths(convertK);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundStudentAnswer);
 };
 
 //Fahrenheit
@@ -146,13 +152,15 @@ const fahrenheitConversion = (
 const fahrenToKelvin = (fInput: number, studentAnswer: number) => {
   const convertF = (fInput - 32) * (5 / 9) + 273.15;
   const roundConvert = roundToTenths(convertF);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundStudentAnswer);
 };
 
 const fahrenToCels = (fInput: number, studentAnswer: number) => {
   const convertF = (fInput - 32) * (5 / 9);
   const roundConvert = roundToTenths(convertF);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundStudentAnswer);
 };
 
 //Rankine
@@ -179,13 +187,15 @@ export const rankineConversion = (
 const rankineToKelvin = (rInput: number, studentAnswer: number) => {
   const convertR = rInput * (5 / 9);
   const roundConvert = roundToTenths(convertR);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundedStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundedStudentAnswer);
 };
 
 const rankineToCels = (rInput: number, studentAnswer: number) => {
   const convertR = (rInput - 491.67) * (5 / 9);
   const roundConvert = roundToTenths(convertR);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundedStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundedStudentAnswer);
 };
 
 // Celsius
@@ -212,13 +222,15 @@ const celsiusConversion = (
 const celsiusToFaren = (cInput: number, studentAnswer: number) => {
   const convertC = cInput * 1.8 + 32;
   const roundConvert = roundToTenths(convertC);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundedStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundedStudentAnswer);
 };
 
 const celsiusToRankine = (cInput: number, studentAnswer: number) => {
   const convertC = cInput * 1.8 + 491.67;
   const roundConvert = roundToTenths(convertC);
-  return checkAnswer(roundConvert, studentAnswer);
+  const roundedStudentAnswer = roundToTenths(studentAnswer);
+  return checkAnswer(roundConvert, roundedStudentAnswer);
 };
 
 // Liters
@@ -309,7 +321,7 @@ const cupsConversion = (
     case "tablespoons":
       return findAnswer(cInput, studentAnswer, 16, multiplyAmount);
     case "cubic-inches":
-      return findAnswer(cInput, studentAnswer, 14.438, multiplyAmount);
+      return findAnswer(cInput, studentAnswer, 14.4375, multiplyAmount);
     case "cups":
       return oneToOne(cInput, studentAnswer);
     case "cubic-feet":
@@ -332,15 +344,15 @@ const cubicFeetConversion = (
     case "liters":
       return findAnswer(cInput, studentAnswer, 28.317, multiplyAmount);
     case "tablespoons":
-      return findAnswer(cInput, studentAnswer, 1915, multiplyAmount);
+      return findAnswer(cInput, studentAnswer, 1915.012987, multiplyAmount);
     case "cubic-inches":
       return findAnswer(cInput, studentAnswer, 1728, multiplyAmount);
     case "cups":
-      return findAnswer(cInput, studentAnswer, 119.7, multiplyAmount);
+      return findAnswer(cInput, studentAnswer, 119.688312, multiplyAmount);
     case "cubic-feet":
       return oneToOne(cInput, studentAnswer);
     case "gallons":
-      return findAnswer(cInput, studentAnswer, 7.481, multiplyAmount);
+      return findAnswer(cInput, studentAnswer, 7.480519, multiplyAmount);
     default:
       return "invalid";
   }
@@ -355,7 +367,7 @@ const gallonConversion = (
 ) => {
   switch (type) {
     case "liters":
-      return findAnswer(gInput, studentAnswer, 3.785, multiplyAmount);
+      return findAnswer(gInput, studentAnswer, 3.785411784, multiplyAmount);
     case "tablespoons":
       return findAnswer(gInput, studentAnswer, 256, multiplyAmount);
     case "cubic-inches":
@@ -363,7 +375,7 @@ const gallonConversion = (
     case "cups":
       return findAnswer(gInput, studentAnswer, 16, multiplyAmount);
     case "cubic-feet":
-      return findAnswer(gInput, studentAnswer, 7.48, divideAmount);
+      return findAnswer(gInput, studentAnswer, 7.48051948, divideAmount);
     case "gallons":
       return oneToOne(gInput, studentAnswer);
     default:
