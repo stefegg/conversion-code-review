@@ -9,12 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        border: "#3700b3",
-        text: "#BB86FC",
-        bodyBg: "#121212",
-        secondary: "#03c51d",
-        error: "#cf6679",
-        link: "#0070E0",
+        text: "#ffffff",
+        primaryDark: "#181818",
+        primaryLight: "#1F2E47",
+        secondary: "#bce7fd",
+        accentDark: "#923021",
+        accentLight: "#cd0909",
+        tertiaryLight: "#ffdd00",
+        tertiaryDark: "#F2bb05",
       },
     },
   },
@@ -22,7 +24,7 @@ const config: Config = {
   safelist: [
     {
       pattern:
-        /(bg|text|border)-(border|text|containerBg|bodyBg|containerHover|error|link|secondary)/,
+        /(bg|text|border)-(text|primaryDark|primaryLight|secondary|accentDark|accentLight|tertiaryLight|tertiaryDark)/,
       variants: ["before", "hover", "focus"],
     },
   ],

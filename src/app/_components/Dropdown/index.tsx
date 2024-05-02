@@ -29,10 +29,14 @@ const Dropdown = (props: DropdownProps) => {
     }
   };
 
+  const iconStyle = {
+    filter:
+      "invert(93%) sepia(15%) saturate(6235%) hue-rotate(345deg) brightness(91%) contrast(111%)",
+  };
+
   return (
     <div className="relative">
-      <span className="mb-1 text-base h-6 flex">{title}</span>
-
+      <span className="mb-1 text-text h-6 flex">{title}</span>
       <div className="flex flex-row">
         <div>
           <div
@@ -42,7 +46,11 @@ const Dropdown = (props: DropdownProps) => {
           >
             {value}
           </div>
-          <span className={`h-3.5 text-sm text-${error ? "error" : "bodyBg"}`}>
+          <span
+            className={`h-3.5 text-sm text-${
+              error ? "accentLight" : "primaryDark"
+            }`}
+          >
             {error ? error : "x"}
           </span>
         </div>
@@ -55,12 +63,13 @@ const Dropdown = (props: DropdownProps) => {
             alt="chev"
             width={20}
             height={20}
+            style={iconStyle}
           />
         </div>
       </div>
       {isOpen && (
         <div
-          className={`w-36 z-40 rounded-lg absolute h-auto max-h-32 overflow-auto border-2 bg-bodyBg border-border
+          className={`w-36  rounded-lg absolute h-auto max-h-32 overflow-auto border-2 bg-primaryDark border-tertiaryDark
              top-16
           `}
           onMouseLeave={() => mouseOut()}
@@ -69,7 +78,7 @@ const Dropdown = (props: DropdownProps) => {
             <div
               key={idx}
               onClick={() => clickItem(o.setter)}
-              className={`flex flex-row p-2 items-center text-text hover:bg-border rounded-lg cursor-pointer`}
+              className={`flex flex-row p-2 items-center text-text hover:bg-primaryLight hover:text-tertiaryDark rounded-lg cursor-pointer`}
             >
               {o.title}
             </div>
