@@ -36,18 +36,20 @@ const Dropdown = (props: DropdownProps) => {
 
   return (
     <div className="relative">
-      <span className="mb-1 text-text h-6 flex">{title}</span>
+      <span className="mb-1 text-text h-6 flex text-xs xl:text-base">
+        {title}
+      </span>
       <div className="flex flex-row">
         <div>
           <div
             className={`border-2 border-${
-              error ? "error" : "text"
+              error ? "accentLight" : "text"
             } w-24 rounded text-black bg-white pl-1 h-[28px]`}
           >
             {value}
           </div>
           <span
-            className={`h-3.5 text-sm text-${
+            className={`h-3.5 text-xs xl:text-base text-${
               error ? "accentLight" : "primaryDark"
             }`}
           >

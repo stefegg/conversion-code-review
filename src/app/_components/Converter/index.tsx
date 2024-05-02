@@ -109,14 +109,14 @@ const Converter = () => {
         type="number"
         error={formik.touched.studentInput && formik.errors.studentInput}
       />
-      <div className="flex h-full items-center">
+      <div className="flex h-full items-center mt-1">
         <Button
           buttonText="Compare"
           onClick={formik.handleSubmit}
           type="submit"
         />
       </div>
-      <div className="flex items-center h-full text-text">
+      <div className="flex items-center h-full text-text text-sm xs:text-xs">
         Result:
         <div
           className={`ml-1 w-16
