@@ -119,7 +119,7 @@ const Converter = () => {
       <div className="flex items-center h-full text-text">
         Result:
         <div
-          className={`ml-1
+          className={`ml-1 w-16
           ${result === "correct" ? `text-green-500` : `text-accentLight`}
         `}
         >
