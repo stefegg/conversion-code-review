@@ -3,8 +3,6 @@ import { ChangeEvent } from "react";
 type InputProps = {
   label: string;
   error?: string | false;
-  width: string;
-  placeholder?: string;
   onChange: (e: string | ChangeEvent<any>) => void;
   onBlur: (e: any) => void;
   value: number;
@@ -12,11 +10,10 @@ type InputProps = {
 };
 
 const Input = (props: InputProps) => {
-  const { label, error, width, placeholder, value, onChange, onBlur, type } =
-    props;
+  const { label, error, value, onChange, onBlur, type } = props;
   return (
-    <div className={`flex flex-col w-${width} rounded-sm`}>
-      <span className="text-base mb-1 h-6">{label && label}</span>
+    <div className={`flex flex-col rounded-sm`}>
+      <span className="text-text mb-1 h-6">{label && label}</span>
       <div>
         <div className={`flex rounded w-full}`}>
           <input
@@ -24,13 +21,16 @@ const Input = (props: InputProps) => {
             onChange={onChange}
             onBlur={onBlur}
             className={`outline-0 border-2 border-${
-              error ? `error` : `text`
-            } pl-[6px] w-full rounded text-black focus:border-secondary`}
-            placeholder={placeholder && placeholder}
+              error ? `accentLight` : `text`
+            } pl-[6px] w-full rounded text-primaryDark focus:border-tertiaryDark`}
             type={type}
           />
         </div>
-        <span className={`h-3.5 text-sm text-error`}>
+        <span
+          className={`h-3.5 text-sm text-${
+            error ? `accentLight` : `primaryDark`
+          }`}
+        >
           {error ? error : "x"}
         </span>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { Dropdown, Input, Button } from "../index";
 import { useFormik } from "formik";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { convertOptions } from "@/app/_constants";
 import { validationSchema } from "./validation";
 import {
@@ -67,23 +67,12 @@ const Converter = () => {
     validationSchema: validationSchema,
   });
 
-  useEffect(() => {
-    if (formik.errors.inputNum === "Please enter a number") {
-      setResult("invalid");
-    }
-    if (formik.errors.studentInput === "Please enter a number") {
-      setResult("invalid");
-    }
-  }, [formik.errors]);
-
   return (
-    <div className="w-full flex flex-row items-start gap-4">
+    <div className="w-full flex flex-row items-start gap-8 h-20 px-10 justify-center">
       <Input
-        placeholder={"Enter"}
         value={formik.values.inputNum}
         onChange={formik.handleChange("inputNum")}
         onBlur={formik.handleBlur("inputNum")}
-        width="1/2"
         label="Input Numerical Value"
         type="number"
         error={formik.touched.inputNum && formik.errors.inputNum}
@@ -116,26 +105,27 @@ const Converter = () => {
         value={formik.values.studentInput}
         onChange={formik.handleChange("studentInput")}
         onBlur={formik.handleBlur("studentInput")}
-        width="1/2"
         label="Student Response"
         type="number"
         error={formik.touched.studentInput && formik.errors.studentInput}
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex h-full items-center">
         <Button
           buttonText="Compare"
-          styleType="secondary"
           onClick={formik.handleSubmit}
           type="submit"
         />
-        <Button
-          buttonText="Reset"
-          styleType="primary"
-          onClick={formik.handleSubmit}
-          type="reset"
-        />
       </div>
-      <div>Result:{result}</div>
+      <div className="flex items-center h-full text-text">
+        Result:
+        <div
+          className={`ml-1
+          ${result === "correct" ? `text-green-500` : `text-accentLight`}
+        `}
+        >
+          {result}
+        </div>
+      </div>
     </div>
   );
 };
