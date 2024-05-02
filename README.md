@@ -1,8 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Local Installation
 
-## Getting Started
+First, clone the repo to your machine.
 
-First, run the development server:
+Then, navigate to the flexion-code-review folder, and run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +14,26 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the project.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Viewing the Deployed Version
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To view the deployed version, please visit:
 
-## Learn More
+[https://flexion-code-review.vercel.app/](https://flexion-code-review.vercel.app/)
 
-To learn more about Next.js, take a look at the following resources:
+This is the most recent version of the 'main' branch.  Deployments happen automatically when a branch is merged into the main branch.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To find the latest preview version, please visit:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[https://github.com/stefegg/flexion-code-review/deployments/Preview](https://github.com/stefegg/flexion-code-review/deployments/Preview)
 
-## Deploy on Vercel
+Here you can view deployed working branches, such as a feature branch.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 5 Next Development Tasks Improvement:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Create Login for Teachers and Students, with separate permission levels
+- Allow logged in teachers to create new volumes / temperatures for future tests
+- Allow teacher to test more than one result at a time, ie. add more rows to the screen to input multiple answers at once.  This would allow them to grade a student's entire submission at once.
+- Allow logged in teacher to add a student name, class name, and test name to a student's test, and save this test to a database.
+- Allow logged in teachers to view past records by student name, class name, or test name.  Logged in students would also be able to search by the class and test name criteria, but only see their own results, not those of other students.
