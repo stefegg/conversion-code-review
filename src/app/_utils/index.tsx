@@ -1,26 +1,26 @@
 //General Utils
 
-const roundToTenths = (x: number) => {
+export const roundToTenths = (x: number) => {
   return Math.round(x * 10) / 10;
 };
 
-const subtractAmount = (input: number, amount: number) => {
+export const subtractAmount = (input: number, amount: number) => {
   return input - amount;
 };
 
-const addAmount = (input: number, amount: number) => {
+export const addAmount = (input: number, amount: number) => {
   return input + amount;
 };
 
-const multiplyAmount = (input: number, amount: number) => {
+export const multiplyAmount = (input: number, amount: number) => {
   return input * amount;
 };
 
-const divideAmount = (input: number, amount: number) => {
+export const divideAmount = (input: number, amount: number) => {
   return input / amount;
 };
 
-const oneToOne = (input: number, studentAnswer: number) => {
+export const oneToOne = (input: number, studentAnswer: number) => {
   const roundStudentAnswer = (studentAnswer * 10) / 10;
   return checkAnswer(
     parseFloat(input.toFixed(1)),
@@ -40,7 +40,7 @@ const findAnswer = (
   return checkAnswer(roundConvert, roundStudentAnswer);
 };
 
-const checkAnswer = (roundConvert: number, studentAnswer: number) => {
+export const checkAnswer = (roundConvert: number, studentAnswer: number) => {
   if (roundConvert !== studentAnswer) {
     return "incorrect";
   } else return "correct";
@@ -104,7 +104,7 @@ export const volumeConversion = (
 
 // Kelvin
 
-const kelvinConversion = (
+export const kelvinConversion = (
   type: TempTypes,
   kInput: number,
   studentAnswer: number
@@ -132,7 +132,7 @@ const kelvinToFahren = (kInput: number, studentAnswer: number) => {
 
 //Fahrenheit
 
-const fahrenheitConversion = (
+export const fahrenheitConversion = (
   type: TempTypes,
   fInput: number,
   studentAnswer: number
@@ -202,7 +202,7 @@ const rankineToCels = (rInput: number, studentAnswer: number) => {
 
 // Celsius
 
-const celsiusConversion = (
+export const celsiusConversion = (
   type: TempTypes,
   cInput: number,
   studentAnswer: number
@@ -239,7 +239,7 @@ const celsiusToRankine = (cInput: number, studentAnswer: number) => {
 
 // Liters
 
-const literConversion = (
+export const literConversion = (
   type: VolumeTypes,
   lInput: number,
   studentAnswer: number
@@ -250,7 +250,7 @@ const literConversion = (
     case "tablespoons":
       return findAnswer(lInput, studentAnswer, 67.628, multiplyAmount);
     case "cubic-inches":
-      return findAnswer(lInput, studentAnswer, 61.024, multiplyAmount);
+      return findAnswer(lInput, studentAnswer, 61.0237440947, multiplyAmount);
     case "cups":
       return findAnswer(lInput, studentAnswer, 4.227, multiplyAmount);
     case "cubic-feet":
@@ -264,7 +264,7 @@ const literConversion = (
 
 // Tablespoons
 
-const tableSpoonConversion = (
+export const tableSpoonConversion = (
   type: VolumeTypes,
   tInput: number,
   studentAnswer: number
@@ -275,11 +275,11 @@ const tableSpoonConversion = (
     case "tablespoons":
       return oneToOne(tInput, studentAnswer);
     case "cubic-inches":
-      return findAnswer(tInput, studentAnswer, 1.108, divideAmount);
+      return findAnswer(tInput, studentAnswer, 1.108225, divideAmount);
     case "cups":
       return findAnswer(tInput, studentAnswer, 16, divideAmount);
     case "cubic-feet":
-      return findAnswer(tInput, studentAnswer, 1915, divideAmount);
+      return findAnswer(tInput, studentAnswer, 1915.012987, divideAmount);
     case "gallons":
       return findAnswer(tInput, studentAnswer, 256, divideAmount);
     default:
@@ -289,20 +289,20 @@ const tableSpoonConversion = (
 
 // Cubic-inches
 
-const cubicInchesConversion = (
+export const cubicInchesConversion = (
   type: VolumeTypes,
   cInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return findAnswer(cInput, studentAnswer, 61.024, divideAmount);
+      return findAnswer(cInput, studentAnswer, 61.023744, divideAmount);
     case "tablespoons":
-      return findAnswer(cInput, studentAnswer, 1.108, multiplyAmount);
+      return findAnswer(cInput, studentAnswer, 1.108225, multiplyAmount);
     case "cubic-inches":
       return oneToOne(cInput, studentAnswer);
     case "cups":
-      return findAnswer(cInput, studentAnswer, 14.438, divideAmount);
+      return findAnswer(cInput, studentAnswer, 14.4375, divideAmount);
     case "cubic-feet":
       return findAnswer(cInput, studentAnswer, 1728, divideAmount);
     case "gallons":
@@ -314,7 +314,7 @@ const cubicInchesConversion = (
 
 // Cups
 
-const cupsConversion = (
+export const cupsConversion = (
   type: VolumeTypes,
   cInput: number,
   studentAnswer: number
@@ -329,7 +329,7 @@ const cupsConversion = (
     case "cups":
       return oneToOne(cInput, studentAnswer);
     case "cubic-feet":
-      return findAnswer(cInput, studentAnswer, 119.7, divideAmount);
+      return findAnswer(cInput, studentAnswer, 119.688312, divideAmount);
     case "gallons":
       return findAnswer(cInput, studentAnswer, 16, divideAmount);
     default:
@@ -339,14 +339,14 @@ const cupsConversion = (
 
 // Cubic-feet
 
-const cubicFeetConversion = (
+export const cubicFeetConversion = (
   type: VolumeTypes,
   cInput: number,
   studentAnswer: number
 ) => {
   switch (type) {
     case "liters":
-      return findAnswer(cInput, studentAnswer, 28.317, multiplyAmount);
+      return findAnswer(cInput, studentAnswer, 28.316847, multiplyAmount);
     case "tablespoons":
       return findAnswer(cInput, studentAnswer, 1915.012987, multiplyAmount);
     case "cubic-inches":
@@ -364,7 +364,7 @@ const cubicFeetConversion = (
 
 // Gallons
 
-const gallonConversion = (
+export const gallonConversion = (
   type: VolumeTypes,
   gInput: number,
   studentAnswer: number
