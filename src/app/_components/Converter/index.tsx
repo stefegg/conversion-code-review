@@ -116,7 +116,7 @@ const Converter = () => {
           type="submit"
         />
       </div>
-      <div className="flex items-center h-full text-text text-sm xs:text-xs">
+      <div className="flex items-center h-full text-text text-xs xl:text-base">
         Result:
         <div
           className={`ml-1 w-16
